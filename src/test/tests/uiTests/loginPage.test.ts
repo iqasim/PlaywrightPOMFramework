@@ -18,7 +18,7 @@ test.describe("Login Page Tests", () => {
     await loginPage.login(uiConfig.username, uiConfig.password);
     try{
       await homepage.isWelcomMessageDisplays();
-    }catch (Error err){
+    }catch (err){
       await homepage.errorMessageDisplays();
     }
     
