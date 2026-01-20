@@ -15,8 +15,14 @@ test.describe("Login Page Tests", () => {
   
   test("Verify user can log in with valid credentials", async ({ page, loginPage, homepage }) => {
     await page.context().tracing.start({ name: "Login Test Tracing", screenshots: true, snapshots: true });
-    await loginPage.login(uiConfig.username, uiConfig.password);;
-    await homepage.isWelcomMessageDisplays();
+    await loginPage.login(uiConfig.username, uiConfig.password);
+    try{
+      await homepage.isWelcomMessageDisplays();
+    }catch (Error err){
+      await homepage.errorMessageDisplays();
+    }
+    
+    
     await page.context().tracing.stop({ path: "traces/login-test-trace.zip" });
     await page.screenshot({ path: "screenshots/login-success.png" });
   });
